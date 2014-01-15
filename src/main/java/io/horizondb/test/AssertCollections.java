@@ -30,102 +30,97 @@ import static org.junit.Assert.assertTrue;
  * 
  */
 public final class AssertCollections {
-	
-	/**
-	 * Verify that the specified iterator contains the specified elements in the
-	 * specified order.
-	 * 
-	 * @param <E> the element type
-	 * @param iterator the iterator to verify.
-	 * @param expectedElements the expected elements.
-	 */
-	@SafeVarargs
+
+    /**
+     * Verify that the specified iterator contains the specified elements in the specified order.
+     * 
+     * @param <E> the element type
+     * @param iterator the iterator to verify.
+     * @param expectedElements the expected elements.
+     */
+    @SafeVarargs
     public static <E> void assertIteratorContains(Iterator<E> iterator, E... expectedElements) {
-		
-		int i = 0;
-		
-		for (E expectedElement : expectedElements) {
 
-			
-			assertTrue("The iterator contains only "+ i + " elements but " + expectedElements.length + " were expected",
-			           iterator.hasNext());
-			assertEquals(expectedElement, iterator.next());
-						
-			i++;
-		}
+        int i = 0;
 
-		assertFalse(iterator.hasNext());
-	}
-	
-	/**
-	 * Verify that the specified iterable contains the specified elements in the
-	 * specified order.
-	 * 
-	 * @param <E> the element type
-	 * @param iterable the iterable to verify.
-	 * @param expectedElements the expected elements.
-	 */
-	@SafeVarargs
+        for (E expectedElement : expectedElements) {
+
+            assertTrue("The iterator contains only " + i + " elements but " + expectedElements.length
+                    + " were expected", iterator.hasNext());
+            assertEquals(expectedElement, iterator.next());
+
+            i++;
+        }
+
+        assertFalse(iterator.hasNext());
+    }
+
+    /**
+     * Verify that the specified iterable contains the specified elements in the specified order.
+     * 
+     * @param <E> the element type
+     * @param iterable the iterable to verify.
+     * @param expectedElements the expected elements.
+     */
+    @SafeVarargs
     public static <E> void assertIterableContains(Iterable<E> iterable, E... expectedElements) {
-		
-		assertIteratorContains(iterable.iterator(), expectedElements);
-	}
-	
-	/**
-	 * Verifies that the specified list contains the specified elements in the
-	 * specified order.
-	 * 
-	 * @param <E> the element type
-	 * @param list the list to verify.
-	 * @param expectedElements the expected elements.
-	 */
-	@SafeVarargs
-	public static <E> void assertListContains(List<E> list, E... expectedElements) {
-		
-		assertEquals("the size of the list does not match the expected one.", expectedElements.length, list.size());
 
-		assertIteratorContains(list.iterator(), expectedElements);
-	}
+        assertIteratorContains(iterable.iterator(), expectedElements);
+    }
 
-	/**
-	 * Verifies that the specified collection contains the specified elements.
-	 * 
-	 * @param <E> the element type
-	 * @param collection the collection to verify.
-	 * @param expectedElements the expected elements.
-	 */
-	@SafeVarargs
-	public static <E> void assertCollectionContains(Collection<E> collection, E... expectedElements) {
-		
-		assertEquals(expectedElements.length, collection.size());
+    /**
+     * Verifies that the specified list contains the specified elements in the specified order.
+     * 
+     * @param <E> the element type
+     * @param list the list to verify.
+     * @param expectedElements the expected elements.
+     */
+    @SafeVarargs
+    public static <E> void assertListContains(List<E> list, E... expectedElements) {
 
-		for (int i = 0, m = collection.size(); i < m; i++) {
-			assertTrue("the collection: " + collection + " does not contains the element: " + expectedElements[i],
-			           collection.contains(expectedElements[i]));
-		}
-	}
-	
-	/**
-	 * Verifies that the specified array contains the specified elements in the
-	 * specified order.
-	 * 
-	 * @param <E> the element type
-	 * @param array the array to verify.
-	 * @param expectedElements the expected elements.
-	 */
-	@SafeVarargs
-	public static <E> void assertArrayContains(E[] array, E... expectedElements) {
-		
-		assertEquals(expectedElements.length, array.length);
+        assertEquals("the size of the list does not match the expected one.", expectedElements.length, list.size());
 
-		for (int i = 0, m = array.length; i < m; i++) {
-			assertEquals(expectedElements[i], array[i]);
-		}
-	}
+        assertIteratorContains(list.iterator(), expectedElements);
+    }
 
-	/**
-	 * This class should not be instantiated.
-	 */
-	private AssertCollections() {
-	}
+    /**
+     * Verifies that the specified collection contains the specified elements.
+     * 
+     * @param <E> the element type
+     * @param collection the collection to verify.
+     * @param expectedElements the expected elements.
+     */
+    @SafeVarargs
+    public static <E> void assertCollectionContains(Collection<E> collection, E... expectedElements) {
+
+        assertEquals(expectedElements.length, collection.size());
+
+        for (int i = 0, m = collection.size(); i < m; i++) {
+            assertTrue("the collection: " + collection + " does not contains the element: " + expectedElements[i],
+                       collection.contains(expectedElements[i]));
+        }
+    }
+
+    /**
+     * Verifies that the specified array contains the specified elements in the specified order.
+     * 
+     * @param <E> the element type
+     * @param array the array to verify.
+     * @param expectedElements the expected elements.
+     */
+    @SafeVarargs
+    public static <E> void assertArrayContains(E[] array, E... expectedElements) {
+
+        assertEquals(expectedElements.length, array.length);
+
+        for (int i = 0, m = array.length; i < m; i++) {
+            assertEquals(expectedElements[i], array[i]);
+        }
+    }
+
+    /**
+     * This class should not be instantiated.
+     */
+    private AssertCollections() {
+    }
 }
